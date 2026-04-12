@@ -11,6 +11,6 @@ public class App {
         driver.get("https://automationexercise.com/products");
         driver.manage().window().maximize();
         driver.findElement(By.id("search_product")).sendKeys("shirt");
-        driver.findElement(By.id("submit_search")).click();s
+        driver.findElement(By.id("submit_search")).click();
     }
 }
