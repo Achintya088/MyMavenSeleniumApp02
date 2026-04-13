@@ -5,33 +5,27 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-public class App {
-    public static void main(String[] args){
-
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args )
+    {
+        // Setup Chrome options for headless execution (Jenkins compatible)
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");                // Run without GUI
+        options.addArguments("--no-sandbox");              // Required in Jenkins/VM
+        options.addArguments("--disable-dev-shm-usage");   // Prevent crashes
+        options.addArguments("--remote-allow-origins=*");  // Fix for newer Chrome issues
 
-        // REQUIRED for Jenkins / Linux headless execution
-        options.addArguments("--headless=new");   // run without UI
-        options.addArguments("--no-sandbox");     // required if running as root
-        options.addArguments("--disable-dev-shm-usage"); // avoid memory issues
-        options.addArguments("--disable-gpu");
-        options.addArguments("--remote-allow-origins=*");
-
+        // Initialize WebDriver
         WebDriver driver = new ChromeDriver(options);
-
-        driver.get("https://automationexercise.com/products");
+        driver.get("https://practicetestautomation.com/practice-test-login/");
         driver.manage().window().maximize();
-
-        driver.findElement(By.id("search_product")).sendKeys("shirt");
-        driver.findElement(By.id("submit_search")).click();
-
-        // Optional: wait a bit to see results in logs
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        driver.quit();
+        driver.findElement(By.id("username")).sendKeys("student");
+        driver.findElement(By.id("password")).sendKeys("Password123");
+        driver.findElement(By.id("submit")).click();
     }
 }
